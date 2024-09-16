@@ -4,13 +4,8 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace ExamplePlugin
+namespace ItemsRebalanced
 {
-    // This is an example plugin that can be put in
-    // BepInEx/plugins/ExamplePlugin/ExamplePlugin.dll to test out.
-    // It's a small plugin that adds a relatively simple item to the game,
-    // and gives you that item whenever you press F2.
-
     // This attribute specifies that we have a dependency on a given BepInEx Plugin,
     // We need the R2API ItemAPI dependency because we are using for adding our item to the game.
     // You don't need this if you're not using R2API in your plugin,
@@ -29,7 +24,7 @@ namespace ExamplePlugin
     // BaseUnityPlugin itself inherits from MonoBehaviour,
     // so you can use this as a reference for what you can declare and use in your plugin class
     // More information in the Unity Docs: https://docs.unity3d.com/ScriptReference/MonoBehaviour.html
-    public class ExamplePlugin : BaseUnityPlugin
+    public class ItemsRebalanced : BaseUnityPlugin
     {
         // The Plugin GUID should be a unique ID for this plugin,
         // which is human readable (as it is used in places like the config).
@@ -37,8 +32,8 @@ namespace ExamplePlugin
         // we will deprecate this mod.
         // Change the PluginAuthor and the PluginName !
         public const string PluginGUID = PluginAuthor + "." + PluginName;
-        public const string PluginAuthor = "AuthorName";
-        public const string PluginName = "ExamplePlugin";
+        public const string PluginAuthor = "Egglectro";
+        public const string PluginName = "ItemsRebalanced";
         public const string PluginVersion = "1.0.0";
 
         // We need our item definition to persist through our functions, and therefore make it a class field.
