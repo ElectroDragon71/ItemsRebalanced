@@ -1,10 +1,17 @@
 using BepInEx;
 using R2API;
 using RoR2;
+using On.RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using IL.RoR2;
 using IL.RoR2.Items;
+using RoR2.Items;
+using RoR2.Orbs;
+using RoR2.Projectile;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using UnityEngine;
 
 namespace ItemsRebalanced
 {
