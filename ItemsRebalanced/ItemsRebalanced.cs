@@ -3,6 +3,8 @@ using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using IL.RoR2;
+using IL.RoR2.Items;
 
 namespace ItemsRebalanced
 {
@@ -17,7 +19,7 @@ namespace ItemsRebalanced
     [BepInDependency(LanguageAPI.PluginGUID)]
 
     // This attribute is required, and lists metadata for your plugin.
-    [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
+    [BepInPlugin(PluginGUID, ItemsRebalanced, 1.0.0)]
 
     // This is the main declaration of our plugin class.
     // BepInEx searches for all classes inheriting from BaseUnityPlugin to initialize on startup.
@@ -30,7 +32,6 @@ namespace ItemsRebalanced
         // which is human readable (as it is used in places like the config).
         // If we see this PluginGUID as it is on thunderstore,
         // we will deprecate this mod.
-        // Change the PluginAuthor and the PluginName !
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Egglectro";
         public const string PluginName = "ItemsRebalanced";
