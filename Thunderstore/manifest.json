@@ -1,8 +1,8 @@
 ﻿{
-	"name": "MyFirstMod",
+	"name": "ItemsRebalanced",
 	"version_number": "1.0.0",
-	"website_url": "",
-	"description": "My first Mod",
+	"website_url": "https://github.com/ElectroDragon71/ItemsRebalanced",
+	"description": "Rebalanced some of the weaker items in the game",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2108",
 		"RiskofThunder-HookGenPatcher-1.2.3",

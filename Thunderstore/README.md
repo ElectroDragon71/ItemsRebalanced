@@ -1,3 +1,3 @@
-# My first mod
+# Items Rebalanced
 
-Description.
+Reworks some of the weaker items in the game.
