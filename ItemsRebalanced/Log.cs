@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 
-namespace ExamplePlugin
+namespace ItemsRebalanced
 {
     internal static class Log
     {
