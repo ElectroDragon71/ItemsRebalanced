@@ -1,17 +1,16 @@
 using BepInEx;
 using R2API;
 using RoR2;
-using On.RoR2;
+//using On.RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using IL.RoR2;
-using IL.RoR2.Items;
+//using IL.RoR2;
+//using IL.RoR2.Items;
 using RoR2.Items;
 using RoR2.Orbs;
 using RoR2.Projectile;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using UnityEngine;
 
 namespace ItemsRebalanced
 {
@@ -26,7 +25,7 @@ namespace ItemsRebalanced
     [BepInDependency(LanguageAPI.PluginGUID)]
 
     // This attribute is required, and lists metadata for your plugin.
-    [BepInPlugin(PluginGUID, ItemsRebalanced, 1.0.0)]
+    [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
 
     // This is the main declaration of our plugin class.
     // BepInEx searches for all classes inheriting from BaseUnityPlugin to initialize on startup.
@@ -42,7 +41,7 @@ namespace ItemsRebalanced
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Egglectro";
         public const string PluginName = "ItemsRebalanced";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "0.0.1";
 
         // We need our item definition to persist through our functions, and therefore make it a class field.
         private static ItemDef myItemDef;
@@ -52,6 +51,7 @@ namespace ItemsRebalanced
         {
             // Init our logging class so that we can properly log for debugging
             Log.Init(Logger);
+            ItemsRebalancedConfig.SetUpConfigs(this);
 
             // First let's define our item
             myItemDef = ScriptableObject.CreateInstance<ItemDef>();
