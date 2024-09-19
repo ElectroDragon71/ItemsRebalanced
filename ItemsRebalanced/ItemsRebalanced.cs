@@ -52,6 +52,7 @@ namespace ItemsRebalanced
             // Init our logging class so that we can properly log for debugging
             Log.Init(Logger);
             ItemsRebalancedConfig.SetUpConfigs(this);
+            DescSetter.SetDesc();
 
             // First let's define our item
             myItemDef = ScriptableObject.CreateInstance<ItemDef>();

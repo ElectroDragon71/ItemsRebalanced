@@ -1,6 +1,6 @@
 namespace ItemsRebalanced
 {   
-    public static class ColorCode
+    public static class DescColors
     {
         public enum Color
         {
