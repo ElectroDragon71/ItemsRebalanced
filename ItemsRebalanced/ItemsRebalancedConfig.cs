@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using ItemsRebalanced.Items.Common;
 
 namespace ItemsRebalanced
 {
@@ -43,12 +44,12 @@ namespace ItemsRebalanced
             //);
 
             // Bison Steak
-            EnableBisonSteakRework = plugin.Config.Bind(
+            BisonSteak.Rework = plugin.Config.Bind(
                 "Bison Steak",
                 "Toggle Rework", 1,
                 new ConfigDescription(
-                    "[ 0 = Disabled | 1 = Enabled ]",
-                    new AcceptableValueRange<int>(0, 1)
+                    "[ 0 = Disabled | 1 = Enabled | 2 = Enabled with Rainglish]",
+                    new AcceptableValueRange<int>(0, 2)
                 )
             );
         }

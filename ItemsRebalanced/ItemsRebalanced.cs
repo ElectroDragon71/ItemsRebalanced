@@ -14,6 +14,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using UnityEngine.UIElements.UIR;
 using UnityEngine.Networking;
+using ItemsRebalanced.Items.Common;
 
 namespace ItemsRebalanced
 {
@@ -52,16 +53,21 @@ namespace ItemsRebalanced
             // Init our logging class so that we can properly log for debugging
             Log.Init(Logger);
             ItemsRebalancedConfig.SetUpConfigs(this);
-            DescSetter.SetDesc();
+            new ItemInfoSetter();
+
+            SetUpCommonItems();
+
 
             // Subscribe to health changes
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
             On.RoR2.HealthComponent.Heal += OnCharacterHeal;
 
-            // Common Items
+        }
 
+        private void SetUpCommonItems()
+        {
             // Bison Steak
-            if (ItemsRebalancedConfig.EnableBisonSteakRework.Value == 1)
+            if (BisonSteak.Rework.Value > 0)
             {
                 // Remove Current Effect
                 IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -80,7 +86,6 @@ namespace ItemsRebalanced
                 // Add New Effect
                 On.RoR2.CharacterBody.RecalculateStats += ReworkBisonSteak;
             }
-
         }
 
         // Called when a character takes damage
