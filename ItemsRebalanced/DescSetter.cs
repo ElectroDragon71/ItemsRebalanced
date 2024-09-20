@@ -21,7 +21,7 @@ namespace ItemsRebalanced
             //}
             if (ItemsRebalancedConfig.EnableBisonSteakRework.Value == 1)
             {
-                string BisonSteakInfo = "While above " + "90% health ".Style(DescColors.Color.cIsHealth) + ", increase " + "movement speed ".Style(DescColors.Color.cIsUtility) + "by " + "30% ".Style(DescColors.Color.cIsUtility) + "(+30% per stack)".Style(DescColors.Color.cStack) + ".";
+                string BisonSteakInfo = "While above " + "90% health ".Style(DescColors.Color.cIsHealth) + ", increase " + "movement speed ".Style(DescColors.Color.cIsUtility) + "by " + "28% ".Style(DescColors.Color.cIsUtility) + "(+28% per stack)".Style(DescColors.Color.cStack) + ".";
                 LanguageAPI.Add(itemPrefix + BisonSteakName + pickupSuffix, BisonSteakInfo);
                 LanguageAPI.Add(itemPrefix + BisonSteakName + descSuffix, BisonSteakInfo);
             }

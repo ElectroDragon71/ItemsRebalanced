@@ -1,3 +1,3 @@
-## 1.0.0
+## 0.0.1
 
-- Release
+- Bison Steak: While above 90% health, increase movement speed by 28% (+28% per stack).

@@ -1,12 +1,15 @@
 ﻿{
 	"name": "ItemsRebalanced",
-	"version_number": "1.0.0",
+	"version_number": "0.0.1",
 	"website_url": "https://github.com/ElectroDragon71/ItemsRebalanced",
-	"description": "Rebalanced some of the weaker items in the game",
+	"description": "Rebalanced some of the weaker items in the game. IN DEVELOPMENT",
 	"dependencies": [
-		"bbepis-BepInExPack-5.4.2108",
+		"RiskofThunder-RoR2BepInExPack-1.16.0",
+		"bbepis-BepInExPack-5.4.2115",
 		"RiskofThunder-HookGenPatcher-1.2.3",
-		"RiskofThunder-R2API_Items-1.0.1",
-		"RiskofThunder-R2API_Language-1.0.0"
+		"RiskofThunder-R2API_Core-5.1.0",
+		"RiskofThunder-R2API_ContentManagement-1.0.4",
+		"RiskofThunder-R2API_Items-1.0.3",
+		"RiskofThunder-R2API_Language-1.0.1"
 	]
 }

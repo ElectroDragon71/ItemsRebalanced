@@ -1,7 +1,8 @@
+using System;
 using BepInEx;
 using R2API;
 using RoR2;
-//using On.RoR2;
+using On.RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using IL.RoR2;
@@ -12,6 +13,7 @@ using RoR2.Projectile;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using UnityEngine.UIElements.UIR;
+using UnityEngine.Networking;
 
 namespace ItemsRebalanced
 {
@@ -52,22 +54,92 @@ namespace ItemsRebalanced
             ItemsRebalancedConfig.SetUpConfigs(this);
             DescSetter.SetDesc();
 
+            // Subscribe to health changes
+            On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
+            On.RoR2.HealthComponent.Heal += OnCharacterHeal;
+
             // Common Items
+
+            // Bison Steak
             if (ItemsRebalancedConfig.EnableBisonSteakRework.Value == 1)
             {
+                // Remove Current Effect
                 IL.RoR2.CharacterBody.RecalculateStats += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
-                        x => x.MatchLdloc(62),
-                        x => x.MatchLdloc(36),
+                    c.TryGotoNext(
+                        x => x.MatchLdloc(out _),
+                        x => x.MatchLdloc(out _),
                         x => x.MatchConvR4(),
-                        x => x.MatchLdcR4(25)
+                        x => x.MatchLdcR4(out _)
                     );
                     c.Index += 3;
                     c.Next.Operand = 0.0f;
                 };
+
+                // Add New Effect
+                On.RoR2.CharacterBody.RecalculateStats += ReworkBisonSteak;
+            }
+
+        }
+
+        // Called when a character takes damage
+        private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo damageInfo)
+        {
+            orig(self, damageInfo);
+
+            // Force a stat recalculation after taking damage
+            if (self.body)
+            {
+                self.body.RecalculateStats();
             }
         }
+
+        // Called when a character heals
+        private float OnCharacterHeal(On.RoR2.HealthComponent.orig_Heal orig, RoR2.HealthComponent self, float healAmount, RoR2.ProcChainMask procChainMask, bool nonRegen)
+        {
+            float result = orig(self, healAmount, procChainMask, nonRegen);
+
+            // Force a stat recalculation after healing
+            if (self.body)
+            {
+                self.body.RecalculateStats();
+            }
+
+            return result;
+        }
+
+        // Bison Steak New Effect
+        private void ReworkBisonSteak(On.RoR2.CharacterBody.orig_RecalculateStats orig, RoR2.CharacterBody self)
+        {
+            orig(self);  // Call the original method to retain default functionality
+            if (!NetworkServer.active) return;  // Ensure the effect only applies on the server side
+
+            if (self.healthComponent != null)
+            {
+                // Get the item count for the Bison Steak
+                int itemCount = self.inventory ? self.inventory.GetItemCount(RoR2.RoR2Content.Items.FlatHealth) : 0;
+                if (itemCount > 0)
+                {
+                    // Calculate the current percentage of health
+                    float percentHealth = self.healthComponent.health / self.healthComponent.fullHealth;
+
+                    // Calculate the Bison Steak movement speed bonus (example: 21% per item)
+                    float bisonSteakSpeedBonus = percentHealth >= 0.9f ? 0.28f * itemCount : 0f;
+
+                    // Apply the speed bonus without overwriting existing move speed
+                    float speedBonus = self.baseMoveSpeed * bisonSteakSpeedBonus;
+                    self.moveSpeed += speedBonus;  // Add Bison Steak bonus to existing move speed
+
+                    Logger.LogInfo($"Bison Steak rework activated. Item count: {itemCount}, Percent health: {percentHealth}, MoveSpeed: {self.moveSpeed}");
+                }
+            }
+            else
+            {
+                Logger.LogWarning("HealthComponent is null, cannot apply Bison Steak rework.");
+            }
+        }
+
+
     }
 }
