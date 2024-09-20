@@ -8,7 +8,8 @@ namespace ItemsRebalanced
             cIsDamage,
             cIsHealth,
             cIsUtility,
-            cIsHealing
+            cIsHealing,
+            cIsVoid
         };
 
         public static string Style(this string self, Color style)

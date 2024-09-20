@@ -6,6 +6,7 @@ namespace ItemsRebalanced
     public static class ItemsRebalancedConfig
     {
         // Commons
+        public static ConfigEntry<int> EnableStunGrenadeRework { get; set; }
         public static ConfigEntry<int> EnableBisonSteakRework { get; set; }
 
         // Uncommons
@@ -31,6 +32,16 @@ namespace ItemsRebalanced
 
         public static void CommonConfig(BaseUnityPlugin plugin)
         {
+            // Stun Grenade
+            //EnableStunGrenadeRework = plugin.Config.Bind(
+            //    "Stun Grenade",
+            //    "Toggle Rework", 1,
+            //    new ConfigDescription(
+            //        "[ 0 = Disabled | 1 = Enabled ]",
+            //        new AcceptableValueRange<int>(0, 1)
+            //    )
+            //);
+
             // Bison Steak
             EnableBisonSteakRework = plugin.Config.Bind(
                 "Bison Steak",
