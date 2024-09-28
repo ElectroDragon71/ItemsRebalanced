@@ -73,14 +73,21 @@ namespace ItemsRebalanced
                 IL.RoR2.CharacterBody.RecalculateStats += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.TryGotoNext(
+                    if (c.TryGotoNext(
                         x => x.MatchLdloc(out _),
                         x => x.MatchLdloc(out _),
                         x => x.MatchConvR4(),
                         x => x.MatchLdcR4(out _)
-                    );
-                    c.Index += 3;
-                    c.Next.Operand = 0.0f;
+                    ))
+                    {
+                        c.Index += 3;
+                        c.Next.Operand = 0.0f;
+                    }
+                    else
+                    {
+                        Logger.LogWarning(BisonSteak.Name + " #0 - IL Fail #1");
+                    }
+
                 };
 
                 // Add New Effect
@@ -130,7 +137,7 @@ namespace ItemsRebalanced
                     float percentHealth = self.healthComponent.health / self.healthComponent.fullHealth;
 
                     // Calculate the Bison Steak movement speed bonus (example: 21% per item)
-                    float bisonSteakSpeedBonus = percentHealth >= 0.9f ? 0.28f * itemCount : 0f;
+                    float bisonSteakSpeedBonus = percentHealth >= 1f ? 0.21f * itemCount : 0f;
 
                     // Apply the speed bonus without overwriting existing move speed
                     float speedBonus = self.baseMoveSpeed * bisonSteakSpeedBonus;

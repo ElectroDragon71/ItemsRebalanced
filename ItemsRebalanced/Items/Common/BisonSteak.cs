@@ -20,5 +20,6 @@ namespace ItemsRebalanced.Items.Common
             }
         }
         public static ConfigEntry<int> Rework;
+        public static string Name = "BisonSteak";
     }
 }
